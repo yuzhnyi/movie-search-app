@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+    <title>Top 10 Searches</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Top 10 Most Popular Searches</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Keyword</th>
+                <th>Genre</th>
+                <th>Year</th>
+                <th>Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in results %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] if row[1] else 'Not specified' }}</td>
+                <td>{{ row[2] if row[2] else 'Not specified' }}</td>
+                <td>{{ row[3] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div style="text-align: center;">
+        <a href="/" style="text-decoration: none; font-size: 16px;">Back to Search</a>
+    </div>
+</body>
+</html>

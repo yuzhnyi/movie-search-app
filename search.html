@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+    <title>Movie Search</title>
+</head>
+<body>
+    <h1>Movie Search</h1>
+    <form method="POST">
+        <label>Enter a keyword (optional):</label><br>
+        <input type="text" name="keyword" placeholder="Keyword" value="{{ keyword }}"><br><br>
+
+        <label>Select genre (optional):</label><br>
+        <select name="genre">
+            <option value="">Select Genre</option>
+            <option value="action" {% if genre_input == 'action' %}selected{% endif %}>Action</option>
+            <option value="animation" {% if genre_input == 'animation' %}selected{% endif %}>Animation</option>
+            <option value="children" {% if genre_input == 'children' %}selected{% endif %}>Children</option>
+            <option value="classics" {% if genre_input == 'classics' %}selected{% endif %}>Classics</option>
+            <option value="comedy" {% if genre_input == 'comedy' %}selected{% endif %}>Comedy</option>
+            <option value="documentary" {% if genre_input == 'documentary' %}selected{% endif %}>Documentary</option>
+            <option value="drama" {% if genre_input == 'drama' %}selected{% endif %}>Drama</option>
+            <option value="family" {% if genre_input == 'family' %}selected{% endif %}>Family</option>
+            <option value="foreign" {% if genre_input == 'foreign' %}selected{% endif %}>Foreign</option>
+            <option value="games" {% if genre_input == 'games' %}selected{% endif %}>Games</option>
+            <option value="horror" {% if genre_input == 'horror' %}selected{% endif %}>Horror</option>
+            <option value="music" {% if genre_input == 'music' %}selected{% endif %}>Music</option>
+            <option value="new" {% if genre_input == 'new' %}selected{% endif %}>New</option>
+            <option value="sci-fi" {% if genre_input == 'sci-fi' %}selected{% endif %}>Sci-Fi</option>
+            <option value="sports" {% if genre_input == 'sports' %}selected{% endif %}>Sports</option>
+            <option value="travel" {% if genre_input == 'travel' %}selected{% endif %}>Travel</option>
+        </select><br><br>
+
+        <label>Enter release year (1980–2023, optional):</label><br>
+        <input type="text" name="year" placeholder="Release Year" value="{{ year_input }}"><br><br>
+
+        <input type="submit" value="Search">
+    </form>
+
+    {% if combined_results %}
+        <h2>Search Results:</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Year</th>
+                    <th>Genre</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in combined_results %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% elif combined_results == [] %}
+        <p>No information found for your search.</p>
+    {% endif %}
+    
+    <br>
+    <a href="/top-queries" style="text-decoration: none; font-size: 16px;">View Top 10 Searches</a>
+</body>
+</html>
